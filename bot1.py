@@ -1,3 +1,5 @@
+# vist http://discordpy.readthedocs.io/en/latest/api.html 
+#for more on the discord api
 import discord
 import asyncio
 import random
