@@ -1,3 +1,4 @@
+#using developer API key provided by giphy to send gifs via chat
 import urllib,json
 import urllib.request
 
