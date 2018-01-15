@@ -3,8 +3,12 @@
 import discord
 import asyncio
 import random
+import requests
+import json
+import giphypop
+
 client = discord.Client()
-f=open("bot1key.txt")
+f=open("key.txt")
 for l in f:
     l=l.strip()
     client_key=l
@@ -22,26 +26,33 @@ def coin_flipper():
         return "Heads"
     else :
         return "Tails"
+g = giphypop.Giphy()
 #@client.event
 #def system_write(x):
  #   await client.send_message(message.channel, x)
-
 
 @client.event
 async def on_message(message):
     if message.author == client.user:
         return
-    elif message.content.startswith("?how is my code coming along"):
+    elif message.content.startswith("!how is my code coming along"):
         await client.send_message(message.channel, "The sun is rising, 2/10 test cases passed")
-    elif message.content.startswith("?did bot do good"):
+    elif message.content.startswith("!did bot do good"):
         await client.send_message(message.channel, "https://imgur.com/4uYVWOn")
-    elif message.content.startswith("?ping"):
+    elif message.content.startswith("!ping"):
         await client.send_message(message.channel, "pong!")
-    elif message.content.startswith("?flip"):
+    elif message.content.startswith("!flip"):
         await client.send_message(message.channel, coin_flipper())
-    elif message.content.startswith("?test"):
-        system_write("this Cheese workss")
-        #await client.send_message(message.channel, "Your mama")
-    elif message.content.startswith("??exit"):  # this is broken.
+    elif message.content.startswith("!gif"):
+        img = g.translate(message.content[5:])
+        await client.send_message(message.channel, img)
+    elif message.content.startswith("!dadjoke"):
+        headers = {'Accept': 'text/plain'}
+        img = requests.get('https://icanhazdadjoke.com/', headers=headers)
+        joke = img.text
+        await client.send_message(message.channel, joke)
+    elif message.content.startswith("!test"):
+        await client.send_message(message.channel, "Your mama")
+    elif message.content.startswith("!exit"):  # this is broken.
         return 0
 client.run(client_key)
