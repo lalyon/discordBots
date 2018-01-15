@@ -1,3 +1,4 @@
+#file for pulling dad jokes from icanhazdadjoke.com. They do not require API keys :)
 import requests,json
 headers = {
     'Accept': 'text/plain',
